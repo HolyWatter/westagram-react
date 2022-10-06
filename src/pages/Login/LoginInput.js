@@ -8,19 +8,20 @@ function LoginInput(){
     const [loginAllow, setLoginAllow] = useState('');
     const navigate = useNavigate();
 
-
     function idValueChange(event){
         setLoginValue(event.target.value);
         if(loginValue.includes('@') && pwValue.length >4){
           setLoginAllow('loginbtnallow')
     }
   }
+
     function pwValueChange(event){
         setPwValue(event.target.value);
         if(loginValue.includes('@') && pwValue.length >4){
           setLoginAllow('loginbtnallow')
     }
   }
+
     function onSubmit(event){
       event.preventDefault();
        if(loginValue.includes('@') && pwValue.length >4){
@@ -52,6 +53,5 @@ function LoginInput(){
           </form>
     )
 }
-
 
 export default LoginInput;
