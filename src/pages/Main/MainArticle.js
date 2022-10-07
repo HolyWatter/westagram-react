@@ -3,6 +3,9 @@ import { useState, useReducer } from "react";
 import storyData from "./storyData";
 import Comments from "./Comments";
 
+
+const initialState = { comments : [] };
+
 function reducer(state, action) {
   switch (action.type) {
     case "writeComment":
@@ -12,6 +15,7 @@ function reducer(state, action) {
         text: commentsValue,
         like: false,
       };
+
       return {
         comments: [...state.comments, comment],
       };
@@ -21,19 +25,17 @@ function reducer(state, action) {
         };
       case "clickLike" : 
         return{
-          comments : state.comments.map(item=>{
-            if(item.id == action.payload.id){
-              return {...item, like : !item.like}
+          comments : state.comments.map((item)=>{
+            if(item.id === action.payload.id){
+              return {...item, like : !item.like};
             }
-            return comment
-          })
-        }
+            return item
+          }),
+        };
     default:
       return state;
   }
 }
-
-const initialState = { comments : [] };
 
 function MainArticle() {
 
@@ -46,6 +48,7 @@ function MainArticle() {
   function onSubmit(event) {
     event.preventDefault();
     dispatch({ type: "writeComment", payload: { commentsValue } });
+    console.log(commentsInfo);
     setCommentsValue("");
   }
   
